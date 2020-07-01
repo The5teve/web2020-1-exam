@@ -1,0 +1,25 @@
+/*
+розовый - #ff9ba7
+рыжевато-коричневый - #e8c699
+темно-коричневый - #493326
+
+*/
+.navbar-background{
+    background-color: #ff9ba7;
+
+}
+.navbar-brand {
+    color: #493326;
+}
+
+
+body{
+    background-image: url(../static/img/food.jpg);
+
+}
+.container {
+    border: 2px solid black;
+    background-color: ivory;
+ 
+
+}

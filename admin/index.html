@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Административная панель</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Bootstrap CSS -->
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/styles.css">
+    <script src="https://kit.fontawesome.com/b9c2da3ba1.js" crossorigin="anonymous"></script>
+
+</head>
+  <body>
+
+   <nav class="navbar  navbar-background">
+         <a class="navbar-brand" href="#">
+        Административная панель сайта Жидкий Андрей
+        </a>
+    </nav>
+    <div class="for-alerts">
+
+    </div>
+    <div class="container text-center my-5">
+        <h1> Предприятия общественного питания города Москвы </h1>
+        <hr>
+    </div>
+    <div class="container opinions container-find my-3 py-3">
+
+            <form id="findForm">
+                <div class="form-group ">
+                <div class="row ">
+                    <div class="col-md-7  ">                    
+                        <label for="name">Наименование</label>
+                        <input class="form-control" type="text" name="name" value="Нужное наименование">
+                        <div class="row">
+                            <div class="col-md-8">
+                            <label for="seatsCount">Количество посадочных мест (от / до)</label> 
+                            <div class="form-inline">
+                                <input class="form-control" type="text" name="seatsCount" value="100">
+                                <input class="form-control" type="text" name="seatsCount" value="500">
+                            </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="isNetObject">Является сетевым</label>
+                                <select name="isNetObject" id="isNetObject" class="form-control custom-select">
+                                    <option value="">Не выбрано</option>
+                                    <option value="1">Да</option>
+                                    <option value="0">Нет</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <label for="seatsCount">Дата создания (с / до)</label> 
+                                <div class="form-inline">
+                                    
+        
+                                    <input class="form-control" type="text" name="seatsCount" value="100">
+        
+                                    <input class="form-control" type="text" name="seatsCount" value="500">
+        
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="isNetObject">Льготы</label>
+                                <select name="isNetObject" id="isNetObject" class="form-control custom-select">
+                                    <option value="">Не выбрано</option>
+                                    <option value="1">Да</option>
+                                    <option value="0">Нет</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5  ">
+                        <div class="form-group">
+                        <label for="admArea">Административный округ</label>
+                        <select name="admArea" id="admArea" class="form-control custom-select">
+                            <option value="">Не выбрано</option>
+                            <option value="Центральный административный округ">Центральный административный округ</option>
+                            <option value="saab">Saab</option>
+                            <option value="mercedes">Mercedes</option>
+                            <option value="audi">Audi</option>
+                        </select>
+                        <label for="district">Район</label>
+                        <select name="district" id="district" class="form-control custom-select">
+                            <option value="">Не выбрано</option>
+                            <option value="район Замоскворечье">район Замоскворечье</option>
+                            <option value="mercedes">Mercedes</option>
+                            <option value="audi">Audi</option>
+                        </select>
+                        <label for="typeObject">Вид объекта</label>
+                        <select name="typeObject" id="typeObject" class="form-control custom-select">
+                            <option value="">Не выбрано</option>
+                            <option value="saab">Saab</option>
+                            <option value="mercedes">Mercedes</option>
+                            <option value="audi">Audi</option>
+                        </select>
+                        </div>
+                    </div>
+                </div>
+            </form> 
+                <div class="form-group text-center">
+                    <button type="button" class="btn btn-md btn-outline-warning btn-block" id="downloadDataBtn" >Найти</button>
+                </div>
+            </div>
+
+
+    </div>
+    <div class="container">
+        <table id="records" class="table">
+            <th>Название</th><th>Тип</th><th>Местоположение</th><th>Действия</th>
+            <tbody>
+
+            </tbody>
+          </table>
+    </div>
+    </div>
+      <div class="container my-3 py-3">
+          <form id="createForm">
+            <div class="form-group">
+                <label for="name">Наименование</label>
+                <input class="form-control" type="text" name="name" value="Новое наименование">
+                <label for="address">Адрес</label>
+                <input class="form-control" type="text" name="address" value="Новое наименование">
+                <label for="district">Район</label>
+                <input class="form-control" type="text" name="district" value="Новое наименование">
+            </div>
+            <div class="form-group">
+                <button type="button" id="createBtn" class="btn btn-primary">Создать</button>
+            </div>
+          </form>
+          
+
+      </div>
+      
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="static/main.js" defer> </script>
+  </body>
+</html>
