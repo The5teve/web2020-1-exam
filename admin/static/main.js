@@ -182,6 +182,7 @@ function Success(msg){
     succalert.classList.add('alert-info');
     succalert.classList.add('my-0');
     succalert.innerHTML = msg;
+    
     alerttrigger.append(succalert);
     setTimeout( () => succalert.remove(), 5000)
 }
