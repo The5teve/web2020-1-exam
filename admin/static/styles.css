@@ -5,7 +5,7 @@
 
 */
 .navbar-background{
-    background-color: #ff9ba7;
+    background-color: #9400d3;
 
 }
 .navbar-brand {
@@ -22,6 +22,11 @@ body{
     background-color: white;
     color:  #141a50 ;
     
+
+}
+.clearcontainer{
+    border: 0px;
+    background-color: rgba(0, 0 , 0, 0);
 
 }
 table {
@@ -46,4 +51,12 @@ tbody{
 }
 thead{
     width: 100% !important;
+}
+.navbar-brand{
+    font-family: 'Roboto Mono', monospace;
+    color:#141a50;
+}
+.clearcontainer{
+    background-color: rgba(0, 0 , 0, 0);
+    border: 0px;
 }

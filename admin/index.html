@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <!-- Bootstrap CSS -->
-    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@1,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="static/styles.css">
     <script src="https://kit.fontawesome.com/b9c2da3ba1.js" crossorigin="anonymous"></script>
@@ -15,17 +15,23 @@
 </head>
   <body>
 
-   <nav class="navbar  navbar-background">
+   <nav class="navbar  navbar-background " >
          <a class="navbar-brand" href="#">
+        <img src="../user/static/img/purpled.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
         Админка Жидкий Артём
         </a>
     </nav>
+    <div class="container clearcontainer">
+      <div id="for-alerts" class="my-0" >
 
+      </div>
+    </div>
 
     <div class="container text-center my-5">
         <h1> Предприятия общественного питания города Москвы </h1>
         <hr>
     </div>
+
     <div class="container opinions container-find my-3 py-3">
 
             <form id="findForm">
@@ -124,7 +130,7 @@
             </div>
             <div class="col-md-2">
                 <div class="form-group">
-                    <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#staticBackdrop">
+                    <button type="button" class="btn btn-outline-dark" data-toggle="modal" id="createNewBtn"data-target="#staticBackdrop">
                         Добавить запись
                     </button>
                 </div>
@@ -137,18 +143,18 @@
           <div class="container">
           Департамент торговли и услуги города Москвы
 
-        <div class="row">
-            <div class="col-sm-4">
-                <i class="fa fa-facebook-official" aria-hidden="true"></i>
+            <div class="row">
+                <div class="col-sm-4">
+                    <i class="fa fa-facebook-official" aria-hidden="true"></i>
+                </div>
+                <div class="col-sm-4">
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                </div>
+                <div class="col-sm-4">
+                  <i class="fa fa-youtube" aria-hidden="true"></i>
+                </div>
             </div>
-            <div class="col-sm-4">
-                <i class="fa fa-twitter" aria-hidden="true"></i>
             </div>
-            <div class="col-sm-4">
-               <i class="fa fa-youtube" aria-hidden="true"></i>
-            </div>
-        </div>
-    </div>
       </footer>
 
       <!-- Modal-->
@@ -166,65 +172,57 @@
                     <form id="createForm" >
                       <div class="form-group">
                           <label for="name">Наименование</label>
-                          <input class="form-control"  type="text" name="name" value="Новое наименование">
+                          <input class="form-control"  type="text" name="name" value="Новое наименование" id="name">
                           <div class="form-group mb-0 mt-2">
                             <label  for="inlineRadio1 mb-0">Является сетевым</label>
                           </div>
+
                           <div class="form-check form-check-inline mb-3">
 
-                            <input class="form-check-input" type="radio" name="isNetObject"  value="1">
+                            <input class="form-check-input" type="radio" name="isNetObject" id="isNetTrue" value="1">
                             <label class="form-check-label" for="inlineRadio1">Да</label>
                           </div>
                           <div class="form-check form-check-inline mb-3">
-                            <input class="form-check-input" type="radio" name="isNetObject" value="0">
+                            <input class="form-check-input" type="radio" name="isNetObject" id="isNetFalse"  value="0">
                             <label class="form-check-label" for="inlineRadio2">Нет</label>
                           </div>
+
                           <div class="form-group">
                             <label for="operatingCompany">Название управляющей компании</label>
-                            <input class="form-control" type="text" name="operatingCompany" value="">
+                            <input class="form-control" type="text" name="operatingCompany" id="OperatingCompany" value="">
                           <label for="typeObject">Вид объекта</label>
                           <select name="typeObject" id="typObj1" class="form-control custom-select">
-                            <option value="">Не выбрано</option>
+
                           </select>
                           <label for="admArea">Административный округ</label>
                           <select name="admArea" id="admArea1" class="form-control custom-select">
-                            <option value="">Не выбрано</option>
+
                           </select>
                           <label for="district">Район</label>
                           <select name="district" id="dist1" class="form-control custom-select">
-                            <option value="">Не выбрано</option>
+
                           </select>
                           <label for="address">Адрес</label>
                           <textarea class="form-control" id="address1" name="address"rows="3"></textarea>
                           <label for="seatsCount">Количество посадочных мест</label>
-                          <input class="form-control"  type="text" name="seatsCount" value="">
+                          <input class="form-control"  type="text" name="seatsCount" id="SeatsCount" value="">
                           <div class="form-group mb-0 mt-2">
                             <label  for="socialPrivileges">Показатель социальных льгот</label>
                           </div>
                           <div class="form-check form-check-inline mb-3">
 
-                            <input class="form-check-input" type="radio" name="socialPrivileges"  value="1">
+                            <input class="form-check-input" type="radio" name="socialPrivileges"  id ="socialPrivilegesTrue" value="1">
                             <label class="form-check-label" for="socialPrivileges">Есть</label>
                           </div>
                           <div class="form-check form-check-inline mb-3">
-                            <input class="form-check-input" type="radio" name="socialPrivileges" value="0">
+                            <input class="form-check-input" type="radio" name="socialPrivileges" id ="socialPrivilegesFalse" value="0">
                             <label class="form-check-label" for="socialPrivileges">Нет</label>
                           </div>
                           <div class="form-group">
                             <label for="publicPhone">Телефон</label>
-                            <input class="form-control" type="text" name="publicPhone" value="">
+                            <input class="form-control" type="text" id="publicPhone" name="publicPhone" value="">
                           </div>
-                          <!--
-                          <label for="publicPhone">Географические координаты</label>
-                          <div class="form-group">
-                              <div class="form-inline">
-                                от
-                                <input class="form-control"  type="text" name="name" value="Новое наименование">
-                                до
-                                <input class="form-control"  type="text" name="name" value="Новое наименование">
-                              </div>
-                          </div>
-                          -->
+  
                         </div>
                       </div>
  
@@ -240,6 +238,26 @@
               <div class="form-group">
                 <button type="button" id="createBtn" class="btn btn-primary" data-dismiss="modal">Создать</button>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Modal-Delete-->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="delte">Save changes</button>
             </div>
           </div>
         </div>
