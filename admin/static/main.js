@@ -1,13 +1,58 @@
+
+function renderRecordsSelect(selectRecords) {
+    let adm = document.getElementById('admArea1');
+    let typ = document.getElementById('typObj1');
+    let dist = document.getElementById('dist1');
+    let option;
+    let option1;
+    let option2;
+
+    for (selectRecord of selectRecords) {
+    if (!(selectRecord.admArea in myset)){
+        option = document.createElement('option');
+        option.innerHTML = selectRecord.admArea;
+        option.value = selectRecord.admArea;
+        adm.append(option);
+        myset.add(selectRecord.admArea);
+    } 
+    if (!(selectRecord.typeObject in myset)){
+        option1 = document.createElement('option');
+        option1.innerHTML = selectRecord.typeObject;
+        option1.value = selectRecord.typeObject;
+        typ.append(option1);
+        myset.add(selectRecord.typeObject);
+    } 
+    if (!(selectRecord.district in myset)){
+        option2 = document.createElement('option');
+        option2.innerHTML = selectRecord.district;
+        option2.value = selectRecord.district;
+        dist.append(option2);
+        myset.add(selectRecord.district); 
+    } 
+    
+    }
+
+}
 function deleteBtnHandler(event) {
     let url = new URL(record_path(event.target.dataset.recordId), host);
     sendRequest(url,'DELETE', function () {
         document.getElementById(this.response).remove();
+        
 
     });
 
 
 }
-function editBtnHandler(){}
+function editBtnHandler(event){
+    let url = new URL(record_path(event.target.dataset.recordId), host);
+    sendRequest(url, 'GET', function() {
+ 
+        
+    })
+    let adm = document.getElementById('staticBackdropLabel');
+    adm.innerHTML = "Редактировать запись";
+
+}
 function renderRecord(record){
     let row;
     let td;
@@ -33,8 +78,11 @@ function renderRecord(record){
     btn.onclick = deleteBtnHandler;
     td.append(btn);
     edit = document.createElement('i');
-    edit.classList.add('fas')
-    edit.classList.add('fa-pen')
+    edit.dataset.recordId = record.id;
+    edit.classList.add('fas');
+    edit.setAttribute("data-target","#staticBackdrop");
+    edit.setAttribute("data-toggle","modal");
+    edit.classList.add('fa-pen');
     edit.onclick = editBtnHandler;
     td.append(edit);
     row.append(td);
@@ -63,8 +111,14 @@ function sendRequest(url, method, onloadHandler, params){
 }
 let host = "http://exam-2020-1-api.std-400.ist.mospolytech.ru";
 let records_path = "/api/data1";
-
+let myset = new Set();
 window.onload = function() {
+
+    let url = new URL(records_path, host);
+    sendRequest(url, 'GET', function() {
+    renderRecordsSelect(this.response);
+});
+
     document.getElementById('downloadDataBtn').onclick = function (){
         let url = new URL(records_path, host);
         let params = new FormData(document.getElementById('findForm'));
@@ -74,7 +128,9 @@ window.onload = function() {
         }, params);
 
     }
+
     document.getElementById('createBtn').onclick = function (){
+        
         let url = new URL(records_path, host);
         let params = new FormData(document.getElementById('createForm'));
         sendRequest(url,'POST', function () {

@@ -19,7 +19,31 @@ body{
 }
 .container {
     border: 2px solid black;
-    background-color: ivory;
+    background-color: white;
+    color:  #141a50 ;
     
 
+}
+table {
+    width: 100% !important;
+}
+tbody{
+    width: 100% !important;
+}
+.pagination a{
+
+    color: brown;
+}
+#downloadDataBtn{
+    color: brown;
+    border-color: #493326; 
+}
+#downloadDataBtn:hover{
+    background-color: #70452ca2;
+}
+#createForm label {
+    font-weight: bold;
+}
+thead{
+    width: 100% !important;
 }

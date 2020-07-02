@@ -1,3 +1,23 @@
+function renderRecordsSelect(selectRecords) {
+    let d = document.getElementById('dist');
+    let t = document.getElementById('typObj');
+    let sd = document.getElementById('social');
+    let option;
+    for (selectRecord of selectRecords) {
+    option = document.createElement('option');
+    option.innerHTML = selectRecord.district;
+    option.value = selectRecord.district;
+    d.append(option);
+    option1 = document.createElement('option');
+    option1.innerHTML = selectRecord.typeObject;
+    option1.value = selectRecord.typeObject;
+    t.append(option1);
+    option2 = document.createElement('option');
+    option2.innerHTML = selectRecord.socialPrivileges;
+    option2.value = selectRecord.socialPrivileges;  
+    sd.append(option2);
+    }
+}
 function deleteBtnHandler(event) {
     let url = new URL(record_path(event.target.dataset.recordId), host);
     sendRequest(url,'DELETE', function () {
@@ -48,6 +68,8 @@ function record_path(id){
     return `/api/data1/${id}`
 }
 
+
+
 function sendRequest(url, method, onloadHandler, params){
     let xhr = new XMLHttpRequest();
     xhr.open(method, url);
@@ -61,6 +83,10 @@ let records_path = "/api/data1";
 
 
 window.onload = function() {
+    let url = new URL(records_path, host);
+        sendRequest(url, 'GET', function() {
+        renderRecordsSelect(this.response);
+    });
     document.getElementById('downloadDataBtn').onclick = function (){
         let url = new URL(records_path, host);
         let params = new FormData(document.getElementById('findForm'));
@@ -69,4 +95,6 @@ window.onload = function() {
 
         }, params);
 
-    }}
+    }
+
+}

@@ -17,12 +17,10 @@
 
    <nav class="navbar  navbar-background">
          <a class="navbar-brand" href="#">
-        Административная панель сайта Жидкий Андрей
+        Админка Жидкий Артём
         </a>
     </nav>
-    <div class="for-alerts">
 
-    </div>
 
     <div class="container text-center my-5">
         <h1> Предприятия общественного питания города Москвы </h1>
@@ -55,14 +53,10 @@
                         </div>
                         <div class="row">
                             <div class="col-md-8">
-                                <label for="seatsCount">Дата создания (с / до)</label> 
+                                <label for="created_at">Дата создания (с / до)</label> 
                                 <div class="form-inline">
-                                    
-        
-                                    <input class="form-control" type="text" name="seatsCount" value="100">
-        
-                                    <input class="form-control" type="text" name="seatsCount" value="500">
-        
+                                    <input class="form-control" type="text" name="created_at" value="01.05.2020">
+                                    <input class="form-control" type="text" name="created_at" value="30.06.2020">
                                 </div>
                             </div>
 
@@ -82,24 +76,17 @@
                         <label for="admArea">Административный округ</label>
                         <select name="admArea" id="admArea" class="form-control custom-select">
                             <option value="">Не выбрано</option>
-                            <option value="Центральный административный округ">Центральный административный округ</option>
-                            <option value="saab">Saab</option>
-                            <option value="mercedes">Mercedes</option>
-                            <option value="audi">Audi</option>
+
                         </select>
                         <label for="district">Район</label>
                         <select name="district" id="district" class="form-control custom-select">
                             <option value="">Не выбрано</option>
-                            <option value="район Замоскворечье">район Замоскворечье</option>
-                            <option value="mercedes">Mercedes</option>
-                            <option value="audi">Audi</option>
+
                         </select>
                         <label for="typeObject">Вид объекта</label>
                         <select name="typeObject" id="typeObject" class="form-control custom-select">
                             <option value="">Не выбрано</option>
-                            <option value="saab">Saab</option>
-                            <option value="mercedes">Mercedes</option>
-                            <option value="audi">Audi</option>
+
                         </select>
                         </div>
                     </div>
@@ -108,36 +95,44 @@
                 <div class="form-group text-center">
                     <button type="button" class="btn btn-md btn-outline-warning btn-block" id="downloadDataBtn" >Найти</button>
                 </div>
-            </div>
 
+    </div>
 
     </div>
     <div class="container">
+
         <table id="records" class="table">
+            <thead>
             <th> Название </th> <th> Тип </th> <th> Местоположение </th> <th> Действие</th>
+            </thead>
             <tbody>
 
             </tbody>
           </table>
-    </div>
-    </div>
-      <div class="container my-3 py-3">
-          <form id="createForm">
-            <div class="form-group">
-                <label for="name">Наименование</label>
-                <input class="form-control" type="text" name="name" value="Новое наименование">
-                <label for="address">Адрес</label>
-                <input class="form-control" type="text" name="address" value="Новое наименование">
-                <label for="district">Район</label>
-                <input class="form-control" type="text" name="district" value="Новое наименование">
-            </div>
-            <div class="form-group">
-                <button type="button" id="createBtn" class="btn btn-primary">Создать</button>
-            </div>
-          </form>
-          
 
-      </div>
+        <div class="row mt-3">
+            <div class="col-md-10">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                      <li class="page-item"><a class="page-link" href="#">Предыдущая</a></li>
+                      <li class="page-item"><a class="page-link" href="#">1</a></li>
+                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                      <li class="page-item"><a class="page-link" href="#">Следующая</a></li>
+                    </ul>
+                  </nav>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#staticBackdrop">
+                        Добавить запись
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
       <footer class="footer text-center">
           <div class="container">
           Департамент торговли и услуги города Москвы
@@ -155,6 +150,100 @@
         </div>
     </div>
       </footer>
+
+      <!-- Modal-->
+      <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Добавить новую запись</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body ">
+
+                    <form id="createForm" >
+                      <div class="form-group">
+                          <label for="name">Наименование</label>
+                          <input class="form-control"  type="text" name="name" value="Новое наименование">
+                          <div class="form-group mb-0 mt-2">
+                            <label  for="inlineRadio1 mb-0">Является сетевым</label>
+                          </div>
+                          <div class="form-check form-check-inline mb-3">
+
+                            <input class="form-check-input" type="radio" name="isNetObject"  value="1">
+                            <label class="form-check-label" for="inlineRadio1">Да</label>
+                          </div>
+                          <div class="form-check form-check-inline mb-3">
+                            <input class="form-check-input" type="radio" name="isNetObject" value="0">
+                            <label class="form-check-label" for="inlineRadio2">Нет</label>
+                          </div>
+                          <div class="form-group">
+                            <label for="operatingCompany">Название управляющей компании</label>
+                            <input class="form-control" type="text" name="operatingCompany" value="">
+                          <label for="typeObject">Вид объекта</label>
+                          <select name="typeObject" id="typObj1" class="form-control custom-select">
+                            <option value="">Не выбрано</option>
+                          </select>
+                          <label for="admArea">Административный округ</label>
+                          <select name="admArea" id="admArea1" class="form-control custom-select">
+                            <option value="">Не выбрано</option>
+                          </select>
+                          <label for="district">Район</label>
+                          <select name="district" id="dist1" class="form-control custom-select">
+                            <option value="">Не выбрано</option>
+                          </select>
+                          <label for="address">Адрес</label>
+                          <textarea class="form-control" id="address1" name="address"rows="3"></textarea>
+                          <label for="seatsCount">Количество посадочных мест</label>
+                          <input class="form-control"  type="text" name="seatsCount" value="">
+                          <div class="form-group mb-0 mt-2">
+                            <label  for="socialPrivileges">Показатель социальных льгот</label>
+                          </div>
+                          <div class="form-check form-check-inline mb-3">
+
+                            <input class="form-check-input" type="radio" name="socialPrivileges"  value="1">
+                            <label class="form-check-label" for="socialPrivileges">Есть</label>
+                          </div>
+                          <div class="form-check form-check-inline mb-3">
+                            <input class="form-check-input" type="radio" name="socialPrivileges" value="0">
+                            <label class="form-check-label" for="socialPrivileges">Нет</label>
+                          </div>
+                          <div class="form-group">
+                            <label for="publicPhone">Телефон</label>
+                            <input class="form-control" type="text" name="publicPhone" value="">
+                          </div>
+                          <!--
+                          <label for="publicPhone">Географические координаты</label>
+                          <div class="form-group">
+                              <div class="form-inline">
+                                от
+                                <input class="form-control"  type="text" name="name" value="Новое наименование">
+                                до
+                                <input class="form-control"  type="text" name="name" value="Новое наименование">
+                              </div>
+                          </div>
+                          -->
+                        </div>
+                      </div>
+ 
+                    </form>
+                    
+          
+
+            </div>
+            <div class="modal-footer">
+              <div class="form-group">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+              </div>
+              <div class="form-group">
+                <button type="button" id="createBtn" class="btn btn-primary" data-dismiss="modal">Создать</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
