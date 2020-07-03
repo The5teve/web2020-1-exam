@@ -13,8 +13,8 @@ function editRecord(selectRecord){
 
     if (selectRecord.isNetObject==1){
 
-    let isNetObject = document.getElementById('isNetTrue');
-    isNetObject.checked= true;
+        let isNetObject = document.getElementById('isNetTrue');
+        isNetObject.checked= true;
     } 
     else {
         
@@ -39,15 +39,49 @@ function editRecord(selectRecord){
         } 
     else {
             
-            let socialPrivileges = document.getElementById('socialPrivilegesFalse');
-            socialPrivileges.checked= true;
+        let socialPrivileges = document.getElementById('socialPrivilegesFalse');
+        socialPrivileges.checked= true;
         }
-/*
-    let name = document.getElementById('name');
-    name.value= selectRecord.name;
-    let name = document.getElementById('name');
-    name.value= selectRecord.name;
-    */
+
+}
+function editRecordTable(record){
+    let td;
+    let btn;
+    let edit;
+    let row = document.getElementById(record.id)
+    row.innerHTML = '';
+    td = document.createElement('td');
+    td.innerHTML = record.name;
+    row.append(td);
+    td = document.createElement('td');
+    td.innerHTML = record.typeObject;
+    row.append(td);
+    td = document.createElement('td');
+    td.innerHTML = record.address;
+    row.append(td);
+    td = document.createElement('td');
+    btn = document.createElement('button');
+    btn.dataset.recordId =record.id;
+    btn.innerHTML = 'Удалить';
+    btn.classList.add('btn');
+    btn.classList.add('btn-outline-danger');
+    btn.classList.add('btn-sm');
+    btn.setAttribute("data-target","#exampleModal");
+    btn.setAttribute("data-toggle","modal");
+    btn.onclick = deleteBtnHandler;
+    td.append(btn);
+    edit = document.createElement('i');
+    edit.dataset.recordId = record.id;
+    edit.classList.add('fas');
+    edit.setAttribute("data-target","#staticBackdrop");
+    edit.setAttribute("data-toggle","modal");
+    edit.classList.add('fa-pen');
+    edit.onclick = editBtnHandler;
+    td.append(edit);
+    row.append(td);
+
+
+
 }
 function AddOption(Set, idOfEl){
 temp=document.getElementById(idOfEl);
@@ -90,17 +124,27 @@ function renderRecordsSelect(selectRecords) {
     
 }
 
+function prepareForm(Form) {
+    let result=`?`;
+    for(let [name, value] of Form) {
+       result+=`${name}=${value}&`; // key1=value1, потом key2=value2
+      }
+      return result
+
+}
 function deleteBtnHandler(event) {
 
     let url = new URL(record_path(event.target.dataset.recordId), host);
     sendRequest(url,'DELETE', function () {                                      //////////////////////////////////////////////////////
         document.getElementById(this.response).remove();
-        
+        alert(this.status);
+        this.status==200 ? myAlert(1,`delete`,this.response.name) : myAlert(0,`delete`,this.response.name);
 
     });
 
 
 }
+
 
 function editBtnHandler(event){
     let url = new URL(record_path(event.target.dataset.recordId), host);
@@ -110,6 +154,14 @@ function editBtnHandler(event){
     })
     let adm = document.getElementById('staticBackdropLabel');
     adm.innerHTML = "Редактировать запись";
+    document.getElementById('createBtn').hidden=true;
+    
+    let edit = document.getElementById('editBtn');
+    edit.hidden=false;
+    edit.dataset.recordId=event.target.dataset.recordId;
+
+    
+
 
 
 }
@@ -117,6 +169,7 @@ function renderRecord(record){
     let row;
     let td;
     let btn;
+    let edit;
     row=document.createElement('tr');
     row.id=record.id;
     td = document.createElement('td');
@@ -175,16 +228,27 @@ function sendRequest(url, method, onloadHandler, params){
 let host = "http://exam-2020-1-api.std-400.ist.mospolytech.ru";
 let records_path = "/api/data1";
 
-function Success(msg){
+function myAlert(result,type,name){
     let alerttrigger = document.getElementById('for-alerts');
-    let succalert = document.createElement('div');
-    succalert.classList.add('alert');
-    succalert.classList.add('alert-info');
-    succalert.classList.add('my-0');
-    succalert.innerHTML = msg;
-    
-    alerttrigger.append(succalert);
-    setTimeout( () => succalert.remove(), 5000)
+    let alertElement =document.createElement('div');
+    alertElement.classList.add('alert');
+
+    if (result==1){
+    alertElement.classList.add('alert-info')
+    if (type == "add"){
+    alertElement.innerHTML = `Заведение ${name} успешно добавлено`;     
+    } else if (type == "edit"){
+    alertElement.innerHTML = `Заведение ${name} успешно изменено`;      
+    }else{
+    alertElement.innerHTML = `Заведение ${name} успешно удалено`;      
+    }
+    } else {
+    alertElement.classList.add('alert-danger');
+    alertElement.innerHTML = `Ошибка. Повторите попытку позднее`    
+    }
+    alertElement.classList.add('my-0');
+    alerttrigger.append(alertElement);
+    setTimeout( () => alertElement.remove(), 5000)
 }
 document.getElementById('createNewBtn').onclick = function (){
 
@@ -197,6 +261,12 @@ window.onload = function() {
     renderRecordsSelect(this.response);
 });
 
+    document.getElementById('createNewBtn').onclick = function(){
+        document.getElementById('createBtn').hidden=false;
+        document.getElementById('editBtn').hidden=true;
+        document.getElementById('createForm').reset();
+    }
+
     document.getElementById('downloadDataBtn').onclick = function (){
         let url = new URL(records_path, host);
         let params = new FormData(document.getElementById('findForm'));
@@ -204,18 +274,32 @@ window.onload = function() {
             renderRecords(this.response);
 
         }, params);
-
+        
     }
-  
+    
+    document.getElementById('editBtn').onclick = function (){ 
+        let params = new FormData(document.getElementById('createForm'));
+        let urlId = record_path(document.getElementById('editBtn').dataset.recordId)+prepareForm(params);
+        let url = new URL(urlId, host);
+        sendRequest(url,'PUT', function() {
+            editRecordTable(this.response);
+            this.status==200 ? myAlert(1,`edit`,this.response.name) : myAlert(0,`edit`,this.response.name);
+        });
+
+        document.getElementById('createForm').reset();
+    }
+
     document.getElementById('createBtn').onclick = function (){
 
         let url = new URL(records_path, host);
         let params = new FormData(document.getElementById('createForm'));
+
         sendRequest(url,'POST', function () {
             document.getElementById('records').querySelector('tbody').append(renderRecord(this.response));
-
+            this.status==200 ? myAlert(1,`add`,this.response.name) : myAlert(0,`add`,this.response.name);
+            
         }, params );
-        Success(`Заведение успешно добавлено`);
+ 
         document.getElementById('createForm').reset();
     }
 
