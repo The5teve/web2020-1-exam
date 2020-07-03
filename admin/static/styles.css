@@ -44,7 +44,8 @@ tbody{
     border-color: #493326; 
 }
 #downloadDataBtn:hover{
-    background-color: #70452ca2;
+    background-color: #9400d3;
+    color: white;
 }
 #createForm label {
     font-weight: bold;
@@ -59,4 +60,11 @@ thead{
 .clearcontainer{
     background-color: rgba(0, 0 , 0, 0);
     border: 0px;
+}
+@media screen and (max-width: 434px) {
+    .NotForMobile {
+        width: 0% !important;
+        visibility:  hidden !important;
+    }
+
 }

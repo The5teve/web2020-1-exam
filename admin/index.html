@@ -80,17 +80,17 @@
                     <div class="col-md-5  ">
                         <div class="form-group">
                         <label for="admArea">Административный округ</label>
-                        <select name="admArea" id="admArea" class="form-control custom-select">
+                        <select name="admArea" id="admArea1" class="form-control custom-select">
                             <option value="">Не выбрано</option>
 
                         </select>
                         <label for="district">Район</label>
-                        <select name="district" id="district" class="form-control custom-select">
+                        <select name="district" id="dist1" class="form-control custom-select">
                             <option value="">Не выбрано</option>
 
                         </select>
                         <label for="typeObject">Вид объекта</label>
-                        <select name="typeObject" id="typeObject" class="form-control custom-select">
+                        <select name="typeObject" id="typObj1" class="form-control custom-select">
                             <option value="">Не выбрано</option>
 
                         </select>
@@ -105,11 +105,12 @@
     </div>
 
     </div>
+
     <div class="container">
 
         <table id="records" class="table">
             <thead>
-            <th> Название </th> <th> Тип </th> <th> Местоположение </th> <th> Действие</th>
+            <th> Название </th> <th class="NotForMobile"> Тип </th> <th class="NotForMobile"> Местоположение </th> <th> Действие</th>
             </thead>
             <tbody>
 
@@ -138,6 +139,7 @@
             </div>
         </div>
     </div>
+
     </div>
 
       <footer class="footer text-center">
@@ -190,23 +192,23 @@
 
                           <div class="form-group">
                             <label for="operatingCompany">Название управляющей компании</label>
-                            <input class="form-control" type="text" name="operatingCompany" id="OperatingCompany" value="">
+                            <input class="form-control" type="text" name="operatingCompany" id="operatingCompany" value="">
                           <label for="typeObject">Вид объекта</label>
-                          <select name="typeObject" id="typObj1" class="form-control custom-select">
+                          <select name="typeObject" id="typeObject" class="form-control custom-select">
 
                           </select>
                           <label for="admArea">Административный округ</label>
-                          <select name="admArea" id="admArea1" class="form-control custom-select">
+                          <select name="admArea" id="admArea" class="form-control custom-select">
 
                           </select>
                           <label for="district">Район</label>
-                          <select name="district" id="dist1" class="form-control custom-select">
+                          <select name="district" id="district" class="form-control custom-select">
 
                           </select>
                           <label for="address">Адрес</label>
-                          <textarea class="form-control" id="address1" name="address"rows="3"></textarea>
+                          <textarea class="form-control" id="address" name="address"rows="3"></textarea>
                           <label for="seatsCount">Количество посадочных мест</label>
-                          <input class="form-control"  type="text" name="seatsCount" id="SeatsCount" value="">
+                          <input class="form-control"  type="text" name="seatsCount" id="seatsCount" value="">
                           <div class="form-group mb-0 mt-2">
                             <label  for="socialPrivileges">Показатель социальных льгот</label>
                           </div>
@@ -223,7 +225,59 @@
                             <label for="publicPhone">Телефон</label>
                             <input class="form-control" type="text" id="publicPhone" name="publicPhone" value="">
                           </div>
-  
+                          <div class="text-center">
+                            <h4>Сеты</h4>
+                          </div>
+                          <div class="form-group">
+                            <div class="row">
+                              <div class="col-sm-4">
+                                <label for="set_1">Сет 1</label>
+                                <input class="form-control" type="text" id="set_1" name="set_1" value="">
+                              </div>
+                              <div class="col-sm-4">
+                                <label for="set_2">Сет 2</label>
+                                <input class="form-control" type="text" id="set_2" name="set_2" value="">
+                              </div>
+                              <div class="col-sm-4">
+                                <label for="set_3">Сет 3</label>
+                                <input class="form-control" type="text" id="set_3" name="set_3" value="">
+                              </div>
+                              <div class="col-sm-4">
+                                <label for="set_4">Сет 4</label>
+                                <input class="form-control" type="text" id="set_4" name="set_4" value="">
+                              </div>
+                              <div class="col-sm-4">
+                                <label for="set_5">Сет 5</label>
+                                <input class="form-control" type="text" id="set_5" name="set_5" value="">
+                              </div>
+                              <div class="col-sm-4">
+                                <label for="set_6">Сет 6</label>
+                                <input class="form-control" type="text" id="set_6" name="set_6" value="">
+                              </div>
+                              <div class="col-sm-4">
+                                <label for="set_7">Сет 7</label>
+                                <input class="form-control" type="text" id="set_7" name="set_7" value="">
+                              </div>
+                              <div class="col-sm-4">
+                                <label for="set_8">Сет 8</label>
+                                <input class="form-control" type="text" id="set_8" name="set_8" value="">
+                              </div>
+                              <div class="col-sm-4">
+                                <label for="set_9">Сет 9</label>
+                                <input class="form-control" type="text" id="set_9" name="set_9" value="">
+                              </div>
+                              <div class="col-sm-4">
+                              </div>
+                              <div class="col-sm-4">
+                                <label for="set_10">Сет10</label>
+                                <input class="form-control" type="text" id="set_10" name="set_10" value="">
+                              </div>
+                              <div class="col-sm-4">
+
+                              </div>
+                              
+                            </div>
+                          </div>
                         </div>
                       </div>
  
@@ -250,17 +304,17 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Запись удалена</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Удаление записи</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              ...
+              <h4 id="areYouSure"> </h4>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" id="delte">Save changes</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+              <button type="button" class="btn btn-danger" id="actuallyDeleteBtn" data-dismiss="modal">Удалить</button>
             </div>
           </div>
         </div>

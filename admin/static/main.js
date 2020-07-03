@@ -1,49 +1,84 @@
 function editRecord(selectRecord){
 
-    let name = document.getElementById('name');
-    name.value= selectRecord.name;
-    let address = document.getElementById('address1');
-    address.value= selectRecord.address;
+    let b = JSON.stringify(selectRecord);
 
-    let admArea = document.getElementById('admArea1');
-    admArea.value= selectRecord.admArea;
-
-    let district = document.getElementById('dist1');
-    district.value= selectRecord.district;
-
-    if (selectRecord.isNetObject==1){
-
+   for (let prop in selectRecord) {
+       //alert(prop + "=" + selectRecord[prop]);
+     
+      if (prop=="id" || prop=="created_at" || prop=="updated_at" || prop=="socialDiscount"|| prop=="isNetObject"|| prop=="socialPrivileges" || prop=="rate" ){
+        continue;
+      } else {
+        let temp = document.getElementById(`${prop}`);
+        temp.value= selectRecord[prop];
+      }
+      if (selectRecord.isNetObject==1){
         let isNetObject = document.getElementById('isNetTrue');
         isNetObject.checked= true;
-    } 
-    else {
-        
+      }  else if (selectRecord.isNetObject==0) {      
         let isNetObject = document.getElementById('isNetFalse');
         isNetObject.checked= true;
     }
+    if (selectRecord.socialPrivileges==1){
+        let socialPrivileges = document.getElementById('socialPrivilegesTrue');
+        socialPrivileges.checked= true;
+        } 
+    else if (selectRecord.socialPrivileges==0) {     
+        let socialPrivileges = document.getElementById('socialPrivilegesFalse');
+        socialPrivileges.checked= true;
+        }
+    }
+  
+/*
+    let name = document.getElementById('name');
+    name.value= selectRecord.name;
+    let address = document.getElementById('address');
+    address.value= selectRecord.address;
+    let admArea = document.getElementById('admArea');
+    admArea.value= selectRecord.admArea;
+    let district = document.getElementById('district');
+    district.value= selectRecord.district;
+
     let operatingCompany = document.getElementById('OperatingCompany');
     operatingCompany.value= selectRecord.operatingCompany;
-
     let publicPhone = document.getElementById('publicPhone');
     publicPhone.value= selectRecord.publicPhone;
-
     let seatsCount = document.getElementById('SeatsCount');
     seatsCount.value= selectRecord.seatsCount;
-
-    let typeObject = document.getElementById('typObj1');
+    let typeObject = document.getElementById('typeObject');
     typeObject.value= selectRecord.typeObject;
     if (selectRecord.socialPrivileges==1){
 
         let socialPrivileges = document.getElementById('socialPrivilegesTrue');
         socialPrivileges.checked= true;
         } 
-    else {
+    else if (selectRecord.socialPrivileges==0) {
             
         let socialPrivileges = document.getElementById('socialPrivilegesFalse');
         socialPrivileges.checked= true;
         }
-
-}
+    let set_1 = document.getElementById(`set_1`);
+    set_1.value= selectRecord.set_1;
+    let set_2 = document.getElementById(`set_2`);
+    set_2.value= selectRecord.set_2;
+    let set_3 = document.getElementById(`set_3`);
+    set_3.value= selectRecord.set_3;
+    let set_4 = document.getElementById(`set_4`);
+    set_4.value= selectRecord.set_4;
+    let set_5 = document.getElementById(`set_5`);
+    set_5.value= selectRecord.set_5;
+    let set_6 = document.getElementById(`set_6`);
+    set_6.value= selectRecord.set_6;
+    let set_7 = document.getElementById(`set_7`);
+    set_7.value= selectRecord.set_7;
+    let set_8 = document.getElementById(`set_8`);
+    set_8.value= selectRecord.set_8;
+    let set_9 = document.getElementById(`set_9`);
+    set_9.value= selectRecord.set_9;
+    let set_10 = document.getElementById(`set_10`);
+    set_10.value= selectRecord.set_10;
+ */
+    }
+    
 function editRecordTable(record){
     let td;
     let btn;
@@ -113,15 +148,7 @@ function renderRecordsSelect(selectRecords) {
     myset.clear();
     myset1.clear();
     myset2.clear();
-    /* 
-    for (selectRecord of myset){
-        option = document.createElement('option');
-        option.innerHTML = selectRecord;
-        option.value = selectRecord;
-        adm.append(option);
-    } */
 
-    
 }
 
 function prepareForm(Form) {
@@ -129,19 +156,23 @@ function prepareForm(Form) {
     for(let [name, value] of Form) {
        result+=`${name}=${value}&`; // key1=value1, потом key2=value2
       }
+    
       return result
 
 }
 function deleteBtnHandler(event) {
 
+    document.getElementById('actuallyDeleteBtn').dataset.recordId=event.target.dataset.recordId;
+    document.getElementById('areYouSure').innerHTML = `Вы уверены, что хотите удалить данные предприятия ${document.getElementById(event.target.dataset.recordId).firstChild.innerHTML}?`
+        /*
     let url = new URL(record_path(event.target.dataset.recordId), host);
-    sendRequest(url,'DELETE', function () {                                      //////////////////////////////////////////////////////
+    sendRequest(url,'DELETE', function () {                                      
         document.getElementById(this.response).remove();
-        alert(this.status);
         this.status==200 ? myAlert(1,`delete`,this.response.name) : myAlert(0,`delete`,this.response.name);
+        
 
     });
-
+ */
 
 }
 
@@ -190,7 +221,6 @@ function renderRecord(record){
     btn.classList.add('btn-sm');
     btn.setAttribute("data-target","#exampleModal");
     btn.setAttribute("data-toggle","modal");
-
     btn.onclick = deleteBtnHandler;
     td.append(btn);
     edit = document.createElement('i');
@@ -262,11 +292,22 @@ window.onload = function() {
 });
 
     document.getElementById('createNewBtn').onclick = function(){
+        let adm = document.getElementById('staticBackdropLabel');
+        adm.innerHTML = "Добавить новую запись";
         document.getElementById('createBtn').hidden=false;
         document.getElementById('editBtn').hidden=true;
         document.getElementById('createForm').reset();
     }
 
+    document.getElementById('actuallyDeleteBtn').onclick = function(){
+        let url = new URL(record_path(this.dataset.recordId), host);
+        sendRequest(url,'DELETE', function () {                                      
+        document.getElementById(this.response).remove();
+        this.status==200 ? myAlert(1,`delete`,this.response.name) : myAlert(0,`delete`,this.response.name);
+        
+
+    });
+    }
     document.getElementById('downloadDataBtn').onclick = function (){
         let url = new URL(records_path, host);
         let params = new FormData(document.getElementById('findForm'));
@@ -276,7 +317,7 @@ window.onload = function() {
         }, params);
         
     }
-    
+
     document.getElementById('editBtn').onclick = function (){ 
         let params = new FormData(document.getElementById('createForm'));
         let urlId = record_path(document.getElementById('editBtn').dataset.recordId)+prepareForm(params);
