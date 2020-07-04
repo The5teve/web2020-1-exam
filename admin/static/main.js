@@ -1,3 +1,6 @@
+let currentPage = 1;
+
+
 function editRecord(selectRecord){
 
     let b = JSON.stringify(selectRecord);
@@ -175,7 +178,22 @@ function deleteBtnHandler(event) {
  */
 
 }
+function putPagination() {
 
+    document.getElementById('firstPageElement').dataset.value=currentPage;
+    document.getElementById('firstPageElement').innerHTML=currentPage;
+    document.getElementById('secondPageElement').dataset.value=+currentPage+1;
+    document.getElementById('secondPageElement').innerHTML=+currentPage+1;
+    document.getElementById('thirdPageElement').dataset.value=+currentPage+2;
+    document.getElementById('thirdPageElement').innerHTML=+currentPage+2;
+    document.getElementById('previousElement').dataset.value=+currentPage-1;
+
+    document.getElementById('nextElement').dataset.value=+currentPage+1;
+
+
+
+
+}
 
 function editBtnHandler(event){
     let url = new URL(record_path(event.target.dataset.recordId), host);
@@ -235,12 +253,13 @@ function renderRecord(record){
 
     return row;
 }
-function renderRecords(records){
+function renderRecords(records, page){
+
    let t = document.getElementById('records').querySelector('tbody');
    t.innerHTML = '';
 
-   for (record of records) {
-        t.append(renderRecord(record));
+   for (let record = (page-1)*10; record<page*10; record++) {
+        t.append(renderRecord(records[record]));
    }
 }
 function record_path(id){
@@ -281,14 +300,19 @@ function myAlert(result,type,name){
     setTimeout( () => alertElement.remove(), 5000)
 }
 document.getElementById('createNewBtn').onclick = function (){
-
     document.getElementById('createForm').reset();
 }
-window.onload = function() {
 
+
+
+
+window.onload = function() {
+    putPagination();
     let url = new URL(records_path, host);
     sendRequest(url, 'GET', function() {
+    renderRecords(this.response,currentPage);
     renderRecordsSelect(this.response);
+
 });
 
     document.getElementById('createNewBtn').onclick = function(){
@@ -317,7 +341,16 @@ window.onload = function() {
         }, params);
         
     }
-
+    document.getElementById('greatPaginations').onclick = function(){
+        
+        let tempTarget = event.target.dataset.value;
+        sendRequest(url,'GET', function () {
+            
+            renderRecords(this.response, tempTarget);
+            currentPage=Number(tempTarget);
+            putPagination();
+        });
+    }
     document.getElementById('editBtn').onclick = function (){ 
         let params = new FormData(document.getElementById('createForm'));
         let urlId = record_path(document.getElementById('editBtn').dataset.recordId)+prepareForm(params);

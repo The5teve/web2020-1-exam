@@ -120,12 +120,12 @@
         <div class="row mt-3">
             <div class="col-md-10">
                 <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                      <li class="page-item"><a class="page-link" href="#">Предыдущая</a></li>
-                      <li class="page-item"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item"><a class="page-link" href="#">2</a></li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                      <li class="page-item"><a class="page-link" href="#">Следующая</a></li>
+                    <ul class="pagination" id="greatPaginations">
+                      <li class="page-item"><a class="page-link" href="#" id="previousElement">Предыдущая</a></li>
+                      <li class="page-item"><a class="page-link" href="#" id="firstPageElement">1</a></li>
+                      <li class="page-item"><a class="page-link" href="#" id="secondPageElement">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#" id="thirdPageElement">3</a></li>
+                      <li class="page-item"><a class="page-link" href="#" id="nextElement">Следующая</a></li>
                     </ul>
                   </nav>
             </div>
@@ -310,7 +310,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <h4 id="areYouSure"> </h4>
+              <h6 id="areYouSure"> </h6>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
