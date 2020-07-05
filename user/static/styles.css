@@ -38,3 +38,34 @@ body {
 .correct-btn{
     margin-top: 35px;
 }
+.m-footer {
+    background-color: white;
+}
+.paginationMargin{
+    margin: auto;
+    
+}
+.paginationMargin a {
+    color: #141a50;
+}
+.card {
+    margin: auto;
+}
+.card img {
+    margin: auto;
+    width: 150px !important;
+    height: 150px !important;
+}
+.card a {
+    margin: auto !important;
+}
+.containerChoosen{
+    background-color: white;
+}
+.form-check  {
+    font-size: 20px;
+}
+.SummaryContainer{
+    border: 1px solid black;
+    border-radius: 10px;
+}
