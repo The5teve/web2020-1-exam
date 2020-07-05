@@ -1,5 +1,6 @@
 let currentPage = 1;
 let boolHadaChoose=false;
+let screenWidth = screen.width;
 
 function renderRecordsSelect(selectRecords) {
     let d = document.getElementById('dist');
@@ -22,8 +23,14 @@ function renderRecordsSelect(selectRecords) {
     }
 }
 
-function renderModal(){
-    return
+function renderModal(record){
+
+    document.getElementById('AdmArea').innerHTML=record.admArea;
+    document.getElementById('name').innerHTML=record.name;
+    document.getElementById('District').innerHTML=record.district;
+    document.getElementById('address').innerHTML=record.address;
+    document.getElementById('rating').innerHTML=record.rate;
+
 }
 function deleteBtnHandler(event) {
     
@@ -60,6 +67,17 @@ function addPositionBtn(event){
  }
 
 
+}
+function myAlert(){
+    let alerttrigger = document.getElementById('for-alerts');
+    let alertElement =document.createElement('div');
+    alertElement.classList.add('alert');
+    alertElement.classList.add('alert-info');
+    alertElement.innerHTML = `Спасибо спасибо спасибо спасибо спасибо спасибо. Вы заказали. Мы вам перезвоним, хотя вы нигде не указывали номер телефона. Честно перезвоним. да`;      
+
+    alertElement.classList.add('my-0');
+    alerttrigger.append(alertElement);
+    setTimeout( () => alertElement.remove(), 5000)
 }
 function placeSelectedRecord(record) {
     document.getElementById('getOrder').dataset.recordId=record.id;
@@ -179,7 +197,30 @@ function chooseBtnHandler(event){
 
 
 }
-function editBtnHandler(){}
+
+
+function checkOptions(){
+    document.getElementById('forOptions').innerHTML="";
+   if (document.getElementById('fastDelivery').checked){
+    
+      let row = document.createElement('div');
+      row.classList.add('row');
+
+      let delivery = document.createElement('h6');
+      delivery.classList.add('col-9');
+      delivery.innerHTML="Быстрая доставка";
+      delivery.classList.add('customOption');
+      let delivery1 = document.createElement('div');
+      delivery1.classList.add('col-2');
+      delivery1.innerHTML="+30%";
+      delivery1.classList.add('customOption');
+      row.append(delivery);
+      row.append(delivery1);
+      document.getElementById('forOptions').append(row);
+
+
+   }
+}
 function renderRecord(record){
     let row;
     let td;
@@ -189,12 +230,14 @@ function renderRecord(record){
     td = document.createElement('td');
     td.innerHTML = record.name;
     row.append(td);
-    td = document.createElement('td');
-    td.innerHTML = record.typeObject;            
-    row.append(td);
-    td = document.createElement('td');
-    td.innerHTML = record.address;
-    row.append(td);
+    if (screenWidth>524) {
+        td = document.createElement('td');
+        td.innerHTML = record.typeObject;
+        row.append(td);
+        td = document.createElement('td');
+        td.innerHTML = record.address;
+        row.append(td);
+        }
     td = document.createElement('td');
     btn = document.createElement('button');
     btn.dataset.recordId =record.id;
@@ -221,8 +264,25 @@ function renderRecords(records, page){
 function record_path(id){
     return `/api/data1/${id}`
 }
+function screenCheck(){
+    if(screenWidth<525){
+        document.getElementById('NotForMobile1').remove();
+        document.getElementById('NotForMobile2').remove();
+    }
+}
+function putPagination(key=1) {
+
+    document.getElementById('firstPageElement').dataset.value=currentPage;
+    document.getElementById('firstPageElement').innerHTML=currentPage;
+    document.getElementById('secondPageElement').dataset.value=+currentPage+1;
+    document.getElementById('secondPageElement').innerHTML=+currentPage+1;
+    document.getElementById('thirdPageElement').dataset.value=+currentPage+2;
+    document.getElementById('thirdPageElement').innerHTML=+currentPage+2;
+    document.getElementById('previousElement').dataset.value=+currentPage-1;
+    document.getElementById('nextElement').dataset.value=+currentPage+1;
 
 
+}
 
 function sendRequest(url, method, onloadHandler, params){
     let xhr = new XMLHttpRequest();
@@ -237,11 +297,19 @@ let records_path = "/api/data1";
 
 
 window.onload = function() {
-    document.getElementById('wannaGift').onclick=function(){
-        alert(this.checked)
+    screenCheck();
+    putPagination();
+    document.getElementById('fastDelivery').onclick=function(){
+       let temp =  document.getElementById('percent');
+        this.checked ? temp.innerHTML="+30%" : temp.innerHTML="";
+        
     }
     document.getElementById('moreButton').onclick = function(){
         document.getElementById('moreButtonRemove').remove()
+    }
+    document.getElementById('getOrder').onclick = function(){
+        checkOptions();
+
     }
     let url = new URL(records_path, host);
         sendRequest(url, 'GET', function() {
@@ -258,5 +326,19 @@ window.onload = function() {
 
     }
 
+    document.getElementById('greatPaginations').onclick = function(){
 
+        let tempTarget = event.target.dataset.value;
+        sendRequest(url,'GET', function () {
+            
+            renderRecords(this.response, tempTarget);
+            currentPage=Number(tempTarget);
+            putPagination(key=2);
+ 
+        });
+    }
+    document.getElementById('successFinally').onclick = function(){
+        myAlert();
+        document.getElementById('choosenProp').hidden=true;
+    }
 }
