@@ -35,26 +35,37 @@ function deleteBtnHandler(event) {
 
 
 }
-function doNothing(){
-    return 42;
-}
+
 function addPositionBtn(event){
  let inc = document.getElementById(event.target.dataset.recordId);
- let bool;
- if (inc.value>=1){
-    event.target.innerHTML=="+" ? inc.value=+inc.value+1 : inc.value=+inc.value-1;
-    event.target.innerHTML=="+" ? bool=true : bool=false;
- } else {
-    event.target.innerHTML=="+" ? inc.value=+inc.value+1 : doNothing;
-    event.target.innerHTML=="+" ? bool=true : doNothing;
+ let price = document.getElementById(`p_${event.target.dataset.recordId}`);
+ let temp = document.getElementById('checksum');
+ if (inc.value>0){
+    if(event.target.innerHTML=="+") {
+
+        temp.innerHTML= Number(temp.innerHTML)+Number(price.innerHTML.substring(0,price.innerHTML.length-2));
+        inc.value=+inc.value+1;
+    }
+    else{
+        temp.innerHTML= Number(temp.innerHTML)-Number(price.innerHTML.substring(0,price.innerHTML.length-2));
+        inc.value=+inc.value-1;
+    }
+ } else if (inc.value==0) {
+    if(event.target.innerHTML=="+") {
+
+        temp.innerHTML= Number(temp.innerHTML)+Number(price.innerHTML.substring(0,price.innerHTML.length-2));
+        inc.value=+inc.value+1;
+    }
+
  }
 
- if(bool){
-   
- } else {}
+
 }
 function placeSelectedRecord(record) {
-    
+    document.getElementById('getOrder').dataset.recordId=record.id;
+    let temp = document.getElementById('checksum');
+    temp.dataset.checksum=0;
+    temp.innerHTML="0";
     document.getElementById('choosenProp').hidden=false;
     for (let i =1; i<11; i++) {
         getCard(i).innerHTML='';
@@ -72,6 +83,7 @@ function placeSelectedRecord(record) {
         price.classList.add('card-text');
         price.classList.add('text-center');
         price.classList.add('font-italic');
+        price.id=`p_${record.id}_${i}`;
         switch (i)   {
             case 1:
                 price.innerHTML = `${record.set_1} &#8381;`
@@ -123,7 +135,8 @@ function placeSelectedRecord(record) {
         Count.classList.add('col-4');
         Count.value="0";
         Count.setAttribute("readonly","readonly");
-        Count.id=`${record.id}_${i}`;               
+        Count.id=`${record.id}_${i}`;  
+        Count.dataset.recordId=i;             
         btn1.classList.add('btn');
         btn1.classList.add('col-4');
         btn1.classList.add('btn-secondary');
@@ -224,8 +237,12 @@ let records_path = "/api/data1";
 
 
 window.onload = function() {
-
-    
+    document.getElementById('wannaGift').onclick=function(){
+        alert(this.checked)
+    }
+    document.getElementById('moreButton').onclick = function(){
+        document.getElementById('moreButtonRemove').remove()
+    }
     let url = new URL(records_path, host);
         sendRequest(url, 'GET', function() {
         renderRecords(this.response,currentPage);

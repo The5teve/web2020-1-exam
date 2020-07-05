@@ -227,62 +227,69 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-4 my-5">
-            <div class="card" style="width: 18rem;">
-              <img src="static/img/food.png" class="card-img-top mt-1" alt="...">
-              <div class="card-body" id="card4">
+         </div>
+         <div class="container text-center" id="moreButtonRemove">
+            <button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="moreButton">
+              Показать больше
+            </button>
+          </div>
+          <div class="collapse container-fluid" id="collapseExample">
+            <div class="row">
+              <div class="col-lg-4 my-5">
+                <div class="card" style="width: 18rem;">
+                  <img src="static/img/food.png" class="card-img-top mt-1" alt="...">
+                  <div class="card-body" id="card4">
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="col-lg-4 my-5">
-            <div class="card" style="width: 18rem;">
-              <img src="static/img/food.png" class="card-img-top mt-1" alt="...">
-              <div class="card-body" id="card5">
+              <div class="col-lg-4 my-5">
+                <div class="card" style="width: 18rem;">
+                  <img src="static/img/food.png" class="card-img-top mt-1" alt="...">
+                  <div class="card-body" id="card5">
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="col-lg-4 my-5">
-            <div class="card" style="width: 18rem;">
-              <img src="static/img/food.png" class="card-img-top mt-1" alt="...">
-              <div class="card-body" id="card6">
+              <div class="col-lg-4 my-5">
+                <div class="card" style="width: 18rem;">
+                  <img src="static/img/food.png" class="card-img-top mt-1" alt="...">
+                  <div class="card-body" id="card6">
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="col-lg-4 my-5">
-            <div class="card" style="width: 18rem;">
-              <img src="static/img/food.png" class="card-img-top mt-1" alt="...">
-              <div class="card-body" id="card7">
+              <div class="col-lg-4 my-5">
+                <div class="card" style="width: 18rem;">
+                  <img src="static/img/food.png" class="card-img-top mt-1" alt="...">
+                  <div class="card-body" id="card7">
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="col-lg-4 my-5">
-            <div class="card" style="width: 18rem;">
-              <img src="static/img/food.png" class="card-img-top mt-1" alt="...">
-              <div class="card-body" id="card8">
+              <div class="col-lg-4 my-5">
+                <div class="card" style="width: 18rem;">
+                  <img src="static/img/food.png" class="card-img-top mt-1" alt="...">
+                  <div class="card-body" id="card8">
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="col-lg-4 my-5">
-            <div class="card" style="width: 18rem;">
-              <img src="static/img/food.png" class="card-img-top mt-1" alt="...">
-              <div class="card-body" id="card9">
+              <div class="col-lg-4 my-5">
+                <div class="card" style="width: 18rem;">
+                  <img src="static/img/food.png" class="card-img-top mt-1" alt="...">
+                  <div class="card-body" id="card9">
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="col-lg-4 my-5">
-          </div>
-          <div class="col-lg-4 my-5">
-            <div class="card" style="width: 18rem;">
-              <img src="static/img/food.png" class="card-img-top mt-1" alt="...">
-              <div class="card-body" id="card10">
+              <div class="col-lg-4 my-5">
               </div>
-            </div>
+              <div class="col-lg-4 my-5">
+                <div class="card" style="width: 18rem;">
+                  <img src="static/img/food.png" class="card-img-top mt-1" alt="...">
+                  <div class="card-body" id="card10">
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 my-5">
+              </div>
           </div>
-
-          <div class="col-lg-4 my-5">
-          </div>
-
-      </div>
+        </div>
        </div>
        <hr>
         <h4 class="mt-3 ml-4">Дополнительные опции </h4>
@@ -304,24 +311,13 @@
           </div>
           <div class="container mt-3 SummaryContainer py-4">
             <div class="row">
-              <div class="col-sm-4">
-                <div class="row">
-                  <div class="col-4">
-                    <h3> Итого </h3>
+              <div class="col-sm-8">
+                   <div class="form-inline">
+                    <h3> Итого </h3> <h3 id="checksum" value="0">0</h3><h3> &#8381; </h3>
                   </div>
-                  <div class="col-md-1">
-                    <h3 id="checksum" value="0">0</h3>
-                  </div>
-                  <div class="col-md-1">
-                    <h3> &#8381; </h3>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-4">
-                
               </div>
               <div class="col-sm-4 text-right">
-                <button type="button" class="btn btn-secondary btn-lg btn-block  ">Оформить заказ</button>
+                <button type="button" class="btn btn-secondary btn-lg btn-block  " id="getOrder" data-toggle="modal" data-target="#exampleModal">Оформить заказ</button>
               </div>
             </div>
           </div>
@@ -332,6 +328,118 @@
 
     </footer>
     </div>
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Оформление заказа</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <h6>Позиции заказа</h6>
+        <div>
+
+        </div>
+          <h6>Дополнительные опции</h6>
+        <div>
+
+
+          
+        </div>
+          <h6>Информация о предприятия</h6>
+
+          <div class="row">
+            <div class="col-sm-6">
+
+            </div>
+            <div class="col-sm-6">
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              Название
+            </div>
+            <div class="col-sm-6">
+
+            </div>
+          </div>        
+          <div class="row">
+            <div class="col-sm-6">
+              Административный округ
+            </div>
+            <div class="col-sm-6">
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              Район
+            </div>
+            <div class="col-sm-6">
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              Адрес
+            </div>
+            <div class="col-sm-6">
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              Рейтинг
+            </div>
+            <div class="col-sm-6">
+
+            </div>
+          </div>
+          <h6>Доставка</h6>
+          <div class="row">
+            <div class="col-sm-6">
+              Зона доставки
+            </div>
+            <div class="col-sm-6">
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              Адрес доставки
+            </div>
+            <div class="col-sm-6">
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              Стоимость доставки
+            </div>
+            <div class="col-sm-6">
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              ФИО получателя
+            </div>
+            <div class="col-sm-6">
+
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
     <!-- /div -->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
