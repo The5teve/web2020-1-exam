@@ -11,11 +11,21 @@
 .navbar-brand {
     color: #493326;
 }
-
-
+.form-inline input{
+    width: 50% !important;
+}
+.PaginationElement{
+background-color: rgba(172, 108, 108, 0.747) !important;
+}
 body{
     background-image: url(../static/img/food.jpg);
 
+}
+.fa{
+    padding-right: 5px !important;
+}
+.fas{
+    padding-right: 5px !important;
 }
 .container {
     border: 2px solid black;

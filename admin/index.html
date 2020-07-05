@@ -61,8 +61,8 @@
                             <div class="col-md-8">
                                 <label for="created_at">Дата создания (с / до)</label> 
                                 <div class="form-inline">
-                                    <input class="form-control" type="text" name="created_at" value="01.05.2020">
-                                    <input class="form-control" type="text" name="created_at" value="30.06.2020">
+                                    <input class="form-control" type="date" name="created_at" value="2020-05-01">
+                                    <input class="form-control" type="date" name="created_at" value="2020-06-30">
                                 </div>
                             </div>
 
@@ -109,8 +109,8 @@
     <div class="container">
 
         <table id="records" class="table">
-            <thead>
-            <th> Название </th> <th class="NotForMobile"> Тип </th> <th class="NotForMobile"> Местоположение </th> <th> Действие</th>
+            <thead id="thead">
+            <th> Название </th> <th id="NotForMobile1"> Тип </th> <th id="NotForMobile2"> Местоположение </th> <th> Действие</th>
             </thead>
             <tbody>
 
@@ -121,11 +121,11 @@
             <div class="col-md-10">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination" id="greatPaginations">
-                      <li class="page-item"><a class="page-link" href="#" id="previousElement">Предыдущая</a></li>
-                      <li class="page-item"><a class="page-link" href="#" id="firstPageElement">1</a></li>
-                      <li class="page-item"><a class="page-link" href="#" id="secondPageElement">2</a></li>
-                      <li class="page-item"><a class="page-link" href="#" id="thirdPageElement">3</a></li>
-                      <li class="page-item"><a class="page-link" href="#" id="nextElement">Следующая</a></li>
+                      <li class="page-item"><a class="page-link" href="#records" id="previousElement" >Предыдущая</a></li>
+                      <li class="page-item"><a class="page-link PaginationElement" href="#records" id="firstPageElement" >1</a></li>
+                      <li class="page-item"><a class="page-link" href="#records" id="secondPageElement">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#records" id="thirdPageElement">3</a></li>
+                      <li class="page-item"><a class="page-link" href="#records" id="nextElement">Следующая</a></li>
                     </ul>
                   </nav>
             </div>
@@ -142,11 +142,12 @@
 
     </div>
 
-      <footer class="footer text-center">
-          <div class="container">
-          Департамент торговли и услуги города Москвы
-
-            <div class="row">
+      <footer class="footer text-center ">
+          <div class="container ">
+            <div class="text-center m-3">
+            <h6>Департамент торговли и услуги города Москвы </h6>
+            </div>
+            <div class="row mb-1">
                 <div class="col-sm-4">
                     <i class="fa fa-facebook-official" aria-hidden="true"></i>
                 </div>
@@ -273,7 +274,6 @@
                                 <input class="form-control" type="text" id="set_10" name="set_10" value="">
                               </div>
                               <div class="col-sm-4">
-
                               </div>
                               
                             </div>
@@ -300,8 +300,8 @@
       </div>
 
       <!--Modal-Delete-->
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+      <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">Удаление записи</h5>
@@ -315,6 +315,26 @@
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
               <button type="button" class="btn btn-danger" id="actuallyDeleteBtn" data-dismiss="modal">Удалить</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="showModal" tabindex="-1" role="dialog" aria-labelledby="showModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="showModalLabel">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" id="modalInfoBody">
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Ок!! ок.</button>
+
             </div>
           </div>
         </div>
