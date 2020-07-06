@@ -130,21 +130,21 @@
           </div>
           <div class="col-md-6">
             <label for="district">Район</label>
-            <select name="district" id="dist" class="form-control custom-select">
+            <select name="district" id="district" class="form-control custom-select">
               <option value="">Не выбрано</option>
             </select>
           </div>
           <div class="col-md-3">
-            <label for="typObj">Тип</label>
-            <select name="typObj" id="typObj" class="form-control custom-select">
+            <label for="typeObject">Тип</label>
+            <select name="typeObject" id="typeObject" class="form-control custom-select">
               <option value="">Не выбрано</option>
 
             </select>
           </div>
 
           <div class="col-md-3">
-            <label for="social">Соц. скидки</label>
-            <select name="social" id="social" class="form-control custom-select">
+            <label for="socialPrivileges">Соц. скидки</label>
+            <select name="socialPrivileges" id="socialPrivileges" class="form-control custom-select">
               <option value="">Не выбрано</option>
               <option value="1">Да</option>
               <option value="0">Нет</option>
@@ -334,105 +334,112 @@
         </button>
       </div>
       <div class="modal-body">
-          <h4>Позиции заказа</h4>
-        <div id="forPositions" class="ml-4">
-          
-        </div>
-          <h4>Дополнительные опции</h4>
-        <div id="forOptions">
+              <h4>Позиции заказа</h4>
+            <div id="forPositions" class="ml-4 mr-4">
+              
+            </div>
+              <h4>Дополнительные опции</h4>
+            <div id="forOptions">
 
 
-          
-        </div>
-          <h4>Информация о предприятия</h4>
+              
+            </div>
+              <h4>Информация о предприятия</h4>
 
-          <div class="row">
-            <div class="col-sm-6">
+              <div class="row">
+                <div class="col-sm-6">
 
-            </div>
-            <div class="col-sm-6">
+                </div>
+                <div class="col-sm-6">
 
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">
-             <h6> Название </h6>
-            </div>
-            <div class="col-sm-6">
-              <p id="name" class='font-italic'></p>
-            </div>
-          </div>        
-          <div class="row">
-            <div class="col-sm-6">
-             <h6 > Административный округ </h6>
-            </div>
-            <div class="col-sm-6">
-              <p id="AdmArea" class='font-italic'></p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <h6>  Район </h6>
-            </div>
-            <div class="col-sm-6">
-              <p id="District" class='font-italic'></p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <h6>  Адрес </h6>
-            </div>
-            <div class="col-sm-6">
-              <p id="address" class='font-italic'></p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <h6>  Рейтинг </h6>
-            </div>
-            <div class="col-sm-6">
-              <p id="rating" class='font-italic'></p>
-            </div>
-          </div>
-          <h4>Доставка</h4>
-          <div class="row mb-2">
-            <div class="col-sm-6">
-             <h6> Зона доставки <h6>
-            </div>
-            <div class="col-sm-6">
-              <select class="form-control custom-select">
-                <option value="">Первая зона</option>
-                <option value="">Вторая зона</option>
-                <option value="">Третья зона</option>
-                <option value="">Четвертая зона</option>
-                <option value="">А пятая где? ладно.</option>
-                </select>
-            </div>
-          </div>
-          <div class="row mb-2">
-            <div class="col-sm-6">
-            <h6>  Адрес доставки </h6>
-            </div>
-            <div class="col-sm-6">
-              <textarea class="form-control" type="text" placeholder="Улица Победы Мира Карла-Маркса"> </textarea>
-            </div>
-          </div>
-          <div class="row mb-2">
-            <div class="col-sm-6">
-            <h6>  Стоимость доставки </h6>
-            </div>
-            <div class="col-sm-6">
-              <h6>250 гривен</h6>
-            </div>
-          </div>
-          <div class="row mb-2">
-            <div class="col-sm-6">
-           <h6>   ФИО получателя </h6>
-            </div>
-            <div class="col-sm-6">
-              <input class="form-control" type="text" placeholder="Иван Артем Иванович">
-            </div>
-          </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                <h6> Название </h6>
+                </div>
+                <div class="col-sm-6">
+                  <p id="name" class='font-italic'></p>
+                </div>
+              </div>        
+              <div class="row">
+                <div class="col-sm-6">
+                <h6 > Административный округ </h6>
+                </div>
+                <div class="col-sm-6">
+                  <p id="AdmArea" class='font-italic'></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <h6>  Район </h6>
+                </div>
+                <div class="col-sm-6">
+                  <p id="District" class='font-italic'></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <h6>  Адрес </h6>
+                </div>
+                <div class="col-sm-6">
+                  <p id="address" class='font-italic'></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <h6>  Рейтинг </h6>
+                </div>
+                <div class="col-sm-6">
+                  <p id="rating" class='font-italic'></p>
+                </div>
+              </div>
+              <h4>Доставка</h4>
+              <div class="row mb-2">
+                <div class="col-sm-6">
+                <h6> Зона доставки <h6>
+                </div>
+                <div class="col-sm-6">
+                  <select class="form-control custom-select">
+                    <option value="">Первая зона</option>
+                    <option value="">Вторая зона</option>
+                    <option value="">Третья зона</option>
+                    <option value="">Четвертая зона</option>
+                    <option value="">А пятая где? ладно.</option>
+                    </select>
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-sm-6">
+                <h6>  Адрес доставки </h6>
+                </div>
+                <div class="col-sm-6">
+                  <textarea class="form-control" type="text" placeholder="Улица Победы Мира Карла-Маркса"> </textarea>
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-sm-6">
+                <h6>  Стоимость доставки </h6>
+                </div>
+                <div class="col-sm-6">
+                  <h6 id="deliveryPrice"></h6>
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-sm-6">
+              <h6>   ФИО получателя </h6>
+                </div>
+                <div class="col-sm-6">
+                  <input class="form-control" type="text" placeholder="Иван Артем Иванович">
+                </div>
+              </div>
+              <div class="row">
+              <div class="col-sm-6">
+                <h4>  Итого </h4>
+                </div>
+                <div class="col-sm-6">
+                  <h4 id="TotalCount"> </h4>
+                </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>

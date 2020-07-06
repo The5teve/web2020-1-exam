@@ -3,27 +3,37 @@ let currentPage = 1;
 let screenWidth = screen.width;
 let WannaGift;
 let RecordIdGift;
+let RecordIdGift1;
+let hadAchoose = false;
 function renderRecordsSelect(selectRecords) {
-    let d = document.getElementById('dist');
-    let t = document.getElementById('typObj');
-    let sd = document.getElementById('admArea');
-    let option;
+    let myset = new Set();
+    let myset1 = new Set();
+    let myset2 = new Set();
     for (selectRecord of selectRecords) {
-    option = document.createElement('option');
-    option.innerHTML = selectRecord.district;
-    option.value = selectRecord.district;
-    d.append(option);
-    option1 = document.createElement('option');
-    option1.innerHTML = selectRecord.typeObject;
-    option1.value = selectRecord.typeObject;
-    t.append(option1);
-    option2 = document.createElement('option');
-    option2.innerHTML = selectRecord.admArea;
-    option2.value = selectRecord.admArea;  
-    sd.append(option2);
+        myset.add(selectRecord.admArea);
+        myset1.add(selectRecord.typeObject);
+        myset2.add(selectRecord.district);
+           
     }
-}
+    AddOption(myset, 'admArea'); 
+    AddOption(myset1, 'typeObject');
+    AddOption(myset2, 'district'); 
+    myset.clear();
+    myset1.clear();
+    myset2.clear();
 
+}
+function AddOption(Set, idOfEl){
+    temp=document.getElementById(idOfEl);
+    let option;
+        for (selectRecord of Set) {
+            option = document.createElement('option');
+            option.innerHTML = selectRecord;
+            option.value = selectRecord;
+            temp.append(option);  
+        }
+    
+    }
 function renderModal(record){
 
     document.getElementById('AdmArea').innerHTML=record.admArea;
@@ -46,25 +56,92 @@ function deleteBtnHandler(event) {
 function putPositions(id){
     let positions = document.getElementById('forPositions');
     let record;
-    for(let i=1;i<11;i++)
-    {
+    let name;
+    let price;
+    let img;
+    let count;
+    let total = 0;
+    totalcount=document.getElementById('TotalCount');
+    for(let i=1;i<11;i++) {
       record = document.getElementById(`${id}_${i}`);
       if(record.value>0){
-        row = document.createElement('div');
-        row.classList.add('row');
-        row.classList.add('mb-2')
-        img = document.createElement('img');
-        img.classList.add('forCheckImg');
-        img.src="static/img/food.png";
-        row.append(img);
-        positions.append(row);
-          if(i==RecordIdGift){
+        if(i==RecordIdGift){
+            if (record.value-1>0){
 
+                row = document.createElement('div');
+                row.classList.add('row');
+                row.classList.add('mb-2');
+                row.classList.add('myOwnRow');
+                img = document.createElement('img');
+                img.classList.add('forCheckImg');
+                img.classList.add('col-sm-2');
+                img.src="static/img/food.png";
+                row.append(img);
+                name = document.createElement('h6');
+                name.classList.add('col-sm-3');
+                name.innerHTML=`Сет №${i}`;
+                row.append(name);
+                
+                count = document.createElement('h6');
+                count.classList.add('col-sm-3');
+                count.innerHTML=`${record.value-1} x ${document.getElementById(`p_${id}_${i}`).innerHTML}`;
+                row.append(count);
+                
+                price= document.getElementById(`p_${id}_${i}`);
+                sum = document.createElement('h6');
+                sum.classList.add('col-sm-4');
+                sum.classList.add('text-right');
+                sum.innerHTML=`${Number(record.value-1)*Number(price.innerHTML.substring(0,price.innerHTML.length-2))} &#8381;`;
+                total+=Number(record.value-1)*Number(price.innerHTML.substring(0,price.innerHTML.length-2));
+                row.append(sum);
+                
+                positions.append(row);
+
+            }
+          }
+          else {
+            row = document.createElement('div');
+            row.classList.add('row');
+            row.classList.add('mb-2');
+            row.classList.add('myOwnRow');
+            img = document.createElement('img');
+            img.classList.add('forCheckImg');
+            img.classList.add('col-2');
+            img.src="static/img/food.png";
+            row.append(img);
+            name = document.createElement('h6');
+            name.classList.add('col-3');
+            name.innerHTML=`Сет №${i}`;
+            row.append(name);
+            
+            count = document.createElement('h6');
+            count.classList.add('col-3');
+            count.innerHTML=`${record.value} x ${document.getElementById(`p_${id}_${i}`).innerHTML}`;
+            row.append(count);
+            
+            price= document.getElementById(`p_${id}_${i}`);
+            sum = document.createElement('h6');
+            sum.classList.add('col-4');
+            sum.classList.add('text-right');
+            sum.innerHTML=`${Number(record.value)*Number(price.innerHTML.substring(0,price.innerHTML.length-2))} &#8381;`;
+            total+=Number(record.value)*Number(price.innerHTML.substring(0,price.innerHTML.length-2));
+            row.append(sum);
+            
+            positions.append(row);
           }
 
       }
         
     }
+     if(document.getElementById('fastDelivery').checked){
+     totalcount.innerHTML=`${total+total/100*30} &#8381;` 
+     document.getElementById('deliveryPrice').innerHTML=`${total/100*30} &#8381;`;
+    }
+    else {
+     totalcount.innerHTML=`${total} &#8381;`
+     document.getElementById('deliveryPrice').innerHTML=`0 &#8381;`;   
+    }
+
 }
 function addPositionBtn(event){
  let inc = document.getElementById(event.target.dataset.recordId);
@@ -77,8 +154,10 @@ function addPositionBtn(event){
         inc.value=+inc.value+1;
     }
     else{
+        if(inc.id.substring(0,inc.id.search("_"))!=RecordIdGift1){
         temp.innerHTML= Number(temp.innerHTML)-Number(price.innerHTML.substring(0,price.innerHTML.length-2));
         inc.value=+inc.value-1;
+        }
     }                                                                                                
  } else if (inc.value==0) {                                                                                                
     if(event.target.innerHTML=="+") {                                                                                                
@@ -101,7 +180,7 @@ function myAlert(key=1,act="none",record){
         act=="s" ? alertElement.innerHTML =`Сет №${record} был успешно добавлен к вашему заказу` : alertElement.innerHTML =`Сет №${record} был удален`;
     }
     else {
-    alertElement.innerHTML = `Спасибо спасибо спасибо спасибо спасибо спасибо. Вы заказали. Мы вам перезвоним, хотя вы нигде не указывали номер телефона. Честно перезвоним. да`;      
+    alertElement.innerHTML = `Спасибо за заказ. Мы вам обязательно презвоним. Точно`;      
     }
     alertElement.classList.add('my-0');
     alerttrigger.append(alertElement);
@@ -207,13 +286,30 @@ function placeSelectedRecord(record) {
 function getCard(number) {
     return document.getElementById(`card${number}`)
 }
+function hideAll(){
+    let a = document.getElementsByTagName('tr');
+    for(b of a){
+        b.hidden=true;
+    }
+    for(let record = 1; record<20; record++){
+        a[record].hidden=false;
+    }
+}
 function dintinctRecords(records, Form){
+let t;
+t = document.getElementById('records').querySelector('tbody');
+t.innerHTML = '';
+    for (record of records){
 
-    for (let [key,value] in Form){
-        alert(key);
-        alert(value);
+
+        if ( (Form.get('admArea')==record.admArea || Form.get('admArea')=="")  && (Form.get('district')==record.district || Form.get('district')=="") && (Form.get('typeObject')==record.typeObject || Form.get('typeObject')=="") &&(Form.get('socialPrivileges')==record.socialPrivileges || Form.get('socialPrivileges')=="")  ){                
+           t.append(renderRecord(record));
+        }
+       
     }
 
+    hadAchoose=true;
+    hideAll();
 }
 function chooseBtnHandler(event){
     let url = new URL(record_path(event.target.dataset.recordId), host);
@@ -304,6 +400,15 @@ function renderRecord(record){
 
     return row;
 }
+function doHide(page){
+   let a = document.getElementsByTagName('tr');
+    for(b of a){
+        b.hidden=true;
+    }
+    for(let record = (page-1)*20; record<page*20; record++){
+        a[record].hidden=false;
+    }
+}
 function renderRecords(records, page){
 
     let t = document.getElementById('records').querySelector('tbody');
@@ -364,6 +469,7 @@ window.onload = function() {
         putPositions(this.dataset.recordId);
 
 
+
     }
     let url = new URL(records_path, host);
         sendRequest(url, 'GET', function() {
@@ -384,10 +490,15 @@ window.onload = function() {
 
         let tempTarget = event.target.dataset.value;
         sendRequest(url,'GET', function () {
-            
+            if (!hadAchoose){
             renderRecords(this.response, tempTarget);
             currentPage=Number(tempTarget);
             putPagination(key=2);
+            } else{
+                currentPage=Number(tempTarget);
+                doHide(currentPage);
+                putPagination(key=2);
+            }
  
         });
     }
@@ -398,11 +509,13 @@ window.onload = function() {
             WannaGift = document.getElementById(`${this.dataset.recordId}_${setNumber}`);
             WannaGift.value=+WannaGift.value+1;
             RecordIdGift=setNumber;
+            RecordIdGift1=this.dataset.recordId;
             myAlert(2,"s",setNumber);
         }
         else{
             WannaGift.value=+WannaGift.value-1;
             RecordIdGift=0;
+            RecordIdGift1=0;
             myAlert(2,"f",setNumber);
 
         }
@@ -410,5 +523,11 @@ window.onload = function() {
     document.getElementById('successFinally').onclick = function(){
         myAlert();
         document.getElementById('choosenProp').hidden=true;
+        document.getElementById('wannaGift').checked=false;
+        document.getElementById('fastDelivery').checked=false;
+        RecordIdGift=0;
+        RecordIdGift1=0;
+        let temp =  document.getElementById('percent');
+        this.checked ? temp.innerHTML="+30%" : temp.innerHTML="";
     }
 }

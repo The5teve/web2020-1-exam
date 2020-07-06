@@ -61,8 +61,15 @@ body {
     height: 150px !important;
 }
 .forCheckImg{
-    width: 30px !important;
-    height: 30px !important;
+    width: 20px !important;
+    height: 35px !important;
+}
+.myOwnRow{
+    margin-top: 3px;
+    margin-bottom: 3px;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px;
 }
 .card a {
     margin: auto !important;
