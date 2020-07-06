@@ -60,6 +60,10 @@ body {
     width: 150px !important;
     height: 150px !important;
 }
+.forCheckImg{
+    width: 30px !important;
+    height: 30px !important;
+}
 .card a {
     margin: auto !important;
 }

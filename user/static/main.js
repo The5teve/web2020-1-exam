@@ -1,7 +1,8 @@
 let currentPage = 1;
-let boolHadaChoose=false;
-let screenWidth = screen.width;
 
+let screenWidth = screen.width;
+let WannaGift;
+let RecordIdGift;
 function renderRecordsSelect(selectRecords) {
     let d = document.getElementById('dist');
     let t = document.getElementById('typObj');
@@ -42,7 +43,29 @@ function deleteBtnHandler(event) {
 
 
 }
+function putPositions(id){
+    let positions = document.getElementById('forPositions');
+    let record;
+    for(let i=1;i<11;i++)
+    {
+      record = document.getElementById(`${id}_${i}`);
+      if(record.value>0){
+        row = document.createElement('div');
+        row.classList.add('row');
+        row.classList.add('mb-2')
+        img = document.createElement('img');
+        img.classList.add('forCheckImg');
+        img.src="static/img/food.png";
+        row.append(img);
+        positions.append(row);
+          if(i==RecordIdGift){
 
+          }
+
+      }
+        
+    }
+}
 function addPositionBtn(event){
  let inc = document.getElementById(event.target.dataset.recordId);
  let price = document.getElementById(`p_${event.target.dataset.recordId}`);
@@ -56,10 +79,10 @@ function addPositionBtn(event){
     else{
         temp.innerHTML= Number(temp.innerHTML)-Number(price.innerHTML.substring(0,price.innerHTML.length-2));
         inc.value=+inc.value-1;
-    }
- } else if (inc.value==0) {
-    if(event.target.innerHTML=="+") {
-
+    }                                                                                                
+ } else if (inc.value==0) {                                                                                                
+    if(event.target.innerHTML=="+") {                                                                                                
+                                                                                                
         temp.innerHTML= Number(temp.innerHTML)+Number(price.innerHTML.substring(0,price.innerHTML.length-2));
         inc.value=+inc.value+1;
     }
@@ -68,13 +91,18 @@ function addPositionBtn(event){
 
 
 }
-function myAlert(){
+function myAlert(key=1,act="none",record){
     let alerttrigger = document.getElementById('for-alerts');
     let alertElement =document.createElement('div');
     alertElement.classList.add('alert');
     alertElement.classList.add('alert-info');
-    alertElement.innerHTML = `Спасибо спасибо спасибо спасибо спасибо спасибо. Вы заказали. Мы вам перезвоним, хотя вы нигде не указывали номер телефона. Честно перезвоним. да`;      
+    if (key==2){
 
+        act=="s" ? alertElement.innerHTML =`Сет №${record} был успешно добавлен к вашему заказу` : alertElement.innerHTML =`Сет №${record} был удален`;
+    }
+    else {
+    alertElement.innerHTML = `Спасибо спасибо спасибо спасибо спасибо спасибо. Вы заказали. Мы вам перезвоним, хотя вы нигде не указывали номер телефона. Честно перезвоним. да`;      
+    }
     alertElement.classList.add('my-0');
     alerttrigger.append(alertElement);
     setTimeout( () => alertElement.remove(), 5000)
@@ -84,6 +112,7 @@ function placeSelectedRecord(record) {
     let temp = document.getElementById('checksum');
     temp.dataset.checksum=0;
     temp.innerHTML="0";
+    document.getElementById('wannaGift').dataset.recordId=record.id;
     document.getElementById('choosenProp').hidden=false;
     for (let i =1; i<11; i++) {
         getCard(i).innerHTML='';
@@ -220,7 +249,30 @@ function checkOptions(){
 
 
    }
+   if (document.getElementById('wannaGift').checked){
+    
+    let row = document.createElement('div');
+    row.classList.add('row');
+
+    let delivery = document.createElement('h6');
+    delivery.classList.add('col-9');
+    delivery.innerHTML="Хочу подарок";
+    delivery.classList.add('customOption');
+    let delivery1 = document.createElement('div');
+    delivery1.classList.add('col-2');
+    delivery1.innerHTML=`Сет ${RecordIdGift}`;
+    delivery1.classList.add('customOption');
+    row.append(delivery);
+    row.append(delivery1);
+    document.getElementById('forOptions').append(row);
+
+
+ }
 }
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max))+1;
+  }
 function renderRecord(record){
     let row;
     let td;
@@ -309,6 +361,8 @@ window.onload = function() {
     }
     document.getElementById('getOrder').onclick = function(){
         checkOptions();
+        putPositions(this.dataset.recordId);
+
 
     }
     let url = new URL(records_path, host);
@@ -336,6 +390,22 @@ window.onload = function() {
             putPagination(key=2);
  
         });
+    }
+    document.getElementById('wannaGift').onclick = function(){
+       
+        if (this.checked){
+            setNumber=getRandomInt(10);
+            WannaGift = document.getElementById(`${this.dataset.recordId}_${setNumber}`);
+            WannaGift.value=+WannaGift.value+1;
+            RecordIdGift=setNumber;
+            myAlert(2,"s",setNumber);
+        }
+        else{
+            WannaGift.value=+WannaGift.value-1;
+            RecordIdGift=0;
+            myAlert(2,"f",setNumber);
+
+        }
     }
     document.getElementById('successFinally').onclick = function(){
         myAlert();
