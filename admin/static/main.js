@@ -1,11 +1,7 @@
 let currentPage = 1;
 let hadAchoose = false;
 function selectFormRecords(records, Form){
-  /*
-    if(){
-    renderRecord()
-    }
-    */
+
    return
 }
 let screenWidth = screen.width;
@@ -110,9 +106,9 @@ function renderRecordsSelect(selectRecords) {
 }
 
 function prepareForm(Form) {
-    let result=`?`;
+    let result=` `;
     for(let [name, value] of Form) {
-       result+=`${name}=${value}&`; // key1=value1, потом key2=value2
+       result+=`&${name}=${value}`; // key1=value1, потом key2=value2
       }
     
       return result
@@ -157,6 +153,7 @@ function editBtnHandler(event){
 
 
 }
+
 function renderRecord(record, key="s"){
     let row;
     let td;

@@ -72,9 +72,13 @@ thead{
     border: 0px;
 }
 @media screen and (max-width: 434px) {
-    .NotForMobile {
+    .not {
         width: 0% !important;
-        visibility:  hidden !important;
+        display: none !important;
+    }
+    tr :nth-child(3n) {
+        width: 0% !important;
+        display: none !important;
     }
 
 }

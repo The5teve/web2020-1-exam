@@ -55,6 +55,7 @@ function deleteBtnHandler(event) {
 }
 function putPositions(id){
     let positions = document.getElementById('forPositions');
+    positions.innerHTML="";
     let record;
     let name;
     let price;
@@ -84,7 +85,7 @@ function putPositions(id){
                 
                 count = document.createElement('h6');
                 count.classList.add('col-sm-3');
-                count.innerHTML=`${record.value-1} x ${document.getElementById(`p_${id}_${i}`).innerHTML}`;
+                count.innerHTML=`${record.value} x ${document.getElementById(`p_${id}_${i}`).innerHTML}`;
                 row.append(count);
                 
                 price= document.getElementById(`p_${id}_${i}`);
@@ -134,8 +135,8 @@ function putPositions(id){
         
     }
      if(document.getElementById('fastDelivery').checked){
-     totalcount.innerHTML=`${total+total/100*30} &#8381;` 
-     document.getElementById('deliveryPrice').innerHTML=`${total/100*30} &#8381;`;
+     totalcount.innerHTML=`${total+total/100*20} &#8381;` 
+     document.getElementById('deliveryPrice').innerHTML=`${(total/100*20).toFixed(1)} &#8381;`;
     }
     else {
      totalcount.innerHTML=`${total} &#8381;`
@@ -337,7 +338,7 @@ function checkOptions(){
       delivery.classList.add('customOption');
       let delivery1 = document.createElement('div');
       delivery1.classList.add('col-2');
-      delivery1.innerHTML="+30%";
+      delivery1.innerHTML="+20%";
       delivery1.classList.add('customOption');
       row.append(delivery);
       row.append(delivery1);
@@ -447,7 +448,6 @@ function sendRequest(url, method, onloadHandler, params){
     xhr.responseType = 'json';
     xhr.onload = onloadHandler;
     xhr.send(params);
-
 }
 let host = "http://exam-2020-1-api.std-900.ist.mospolytech.ru";
 let records_path = "/api/data1";
@@ -458,8 +458,7 @@ window.onload = function() {
     putPagination();
     document.getElementById('fastDelivery').onclick=function(){
        let temp =  document.getElementById('percent');
-        this.checked ? temp.innerHTML="+30%" : temp.innerHTML="";
-        
+        this.checked ? temp.innerHTML="+20%" : temp.innerHTML="";
     }
     document.getElementById('moreButton').onclick = function(){
         document.getElementById('moreButtonRemove').remove()
@@ -528,6 +527,6 @@ window.onload = function() {
         RecordIdGift=0;
         RecordIdGift1=0;
         let temp =  document.getElementById('percent');
-        this.checked ? temp.innerHTML="+30%" : temp.innerHTML="";
+        this.checked ? temp.innerHTML="+20%" : temp.innerHTML="";
     }
 }
