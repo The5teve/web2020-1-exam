@@ -1,5 +1,5 @@
 let currentPage = 1;
-
+let hadAchoose = false;
 function selectFormRecords(records, Form){
   /*
     if(){
@@ -306,21 +306,62 @@ window.onload = function() {
     }
     document.getElementById('downloadDataBtn').onclick = function (){
         let url = new URL(records_path, host);
-        let searchForm = new FormData(document.getElementById('findForm'));
+        let myForm = new FormData(document.getElementById('findForm'));
         sendRequest(url,'GET', function () {
-            selectFormRecords(this.response,searchForm);
+            dintinctRecords(this.response, myForm);
 
         });
         
     }
+    //////////////////////////////
+    function hideAll(){
+        let a = document.getElementsByTagName('tr');
+        for(b of a){
+            b.hidden=true;
+        }
+        for(let record = 1; record<a.length; record++){
+            a[record].hidden=false;
+        }
+    }
+    function dintinctRecords(records, Form){
+        let t;
+        t = document.getElementById('records').querySelector('tbody');
+        t.innerHTML = '';
+            for (record of records){
+        
+        
+                if ( (Form.get('admArea')==record.admArea || Form.get('admArea')=="")  && (Form.get('district')==record.district || Form.get('district')=="") && (Form.get('typeObject')==record.typeObject || Form.get('typeObject')=="") &&(Form.get('socialPrivileges')==record.socialPrivileges || Form.get('socialPrivileges')=="")  ){                
+                   t.append(renderRecord(record));
+                }
+               
+            }
+        
+            hadAchoose=true;
+            hideAll();
+    }
+    function doHide(page){
+            let a = document.getElementsByTagName('tr');
+             for(b of a){
+                 b.hidden=true;
+             }
+             for(let record = (page-1)*10; record<page*10; record++){
+                 a[record].hidden=false;
+             }
+    }
+        ///////////////////////////////////////////////
     document.getElementById('greatPaginations').onclick = function(){
 
         let tempTarget = event.target.dataset.value;
         sendRequest(url,'GET', function () {
-            
+        if (!hadAchoose){
             renderRecords(this.response, tempTarget);
             currentPage=Number(tempTarget);
             putPagination(key=2);
+        } else{
+            currentPage=Number(tempTarget);
+            doHide(currentPage);
+            putPagination(key=2);
+        }
  
         });
     }
